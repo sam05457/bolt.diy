@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: bolt-diy
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter
+    region: oregon
+    branch: main
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: WRANGLER_SEND_METRICS
+        value: false
+      - key: RUNNING_IN_DOCKER
+        value: true
+      - key: VITE_LOG_LEVEL
+        value: info
+      # Add your API keys as environment variables in Render dashboard
+      # These should be set in the Render dashboard for security:
+      # - GROQ_API_KEY
+      # - OPENAI_API_KEY
+      # - ANTHROPIC_API_KEY
+      # - GOOGLE_GENERATIVE_AI_API_KEY
+      # - OLLAMA_API_BASE_URL
+      # - XAI_API_KEY
+      # - TOGETHER_API_KEY
+      # - TOGETHER_API_BASE_URL
+      # - AWS_BEDROCK_CONFIG
+      # - DEFAULT_NUM_CTX
