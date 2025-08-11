@@ -1,5 +1,5 @@
-# Use Node.js 20 LTS as base image (alpine variant for smaller image size)
-FROM node:20.18.0-alpine AS base
+# Use Node.js 20 LTS as base image (standard debian variant for better compatibility)
+FROM node:20.18.0 AS base
 
 # Set working directory
 WORKDIR /app
@@ -73,7 +73,9 @@ RUN mkdir -p /root/.config/.wrangler && \
 # Make scripts executable
 RUN chmod +x ./bindings.sh ./start-render.sh
 
-# Build the application
+# Build the application - disable Cloudflare dev proxy for Docker builds
+ENV NODE_ENV=production
+ENV DISABLE_CLOUDFLARE_PROXY=true
 RUN pnpm run build
 
 # Expose port (Render will use PORT environment variable)
