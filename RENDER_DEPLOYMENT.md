@@ -75,6 +75,22 @@ In your Render dashboard, add the following environment variables:
 
 ## Troubleshooting
 
+### Expected Warnings (Normal):
+
+These warnings appear during build but don't affect functionality:
+
+1. **"The CJS build of Vite's Node API is deprecated"**:
+   - This is informational about future Vite versions
+   - Your build will complete successfully
+   - No action needed
+
+2. **"Data fetching is changing to a single fetch in React Router v7"**:
+   - Future compatibility notice for React Router
+   - Current setup works fine
+   - Optional: Add `v3_singleFetch` future flag if desired
+
+3. **"no-git-info" version**: Normal when uploading directly (not via Git)
+
 ### Common Issues:
 
 1. **Git repository error**: This is normal when uploading directly. The app will show "no-git-info" for the commit version.
