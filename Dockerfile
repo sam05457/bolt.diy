@@ -4,13 +4,13 @@ FROM node:20.18.0 AS base
 # Set working directory
 WORKDIR /app
 
-# Install pnpm globally
-RUN npm install -g pnpm@9.14.4
+# Install pnpm and wrangler globally
+RUN npm install -g pnpm@9.14.4 wrangler@4.5.1
 
 # Copy package files for dependency installation
 COPY package.json pnpm-lock.yaml ./
 
-# Install dependencies
+# Install dependencies (including dev dependencies for wrangler)
 RUN pnpm install --frozen-lockfile
 
 # Copy source code
