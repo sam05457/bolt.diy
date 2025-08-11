@@ -95,11 +95,13 @@ These warnings appear during build but don't affect functionality:
 
 1. **Git repository error**: This is normal when uploading directly. The app will show "no-git-info" for the commit version.
 
-2. **Port binding issues**: Make sure the Dockerfile uses the PORT environment variable correctly.
+2. **Cloudflare Workerd binary error**: Fixed in the optimized Dockerfile by disabling the dev proxy during builds.
 
-3. **API key issues**: Verify all required API keys are set in the Render dashboard.
+3. **Port binding issues**: Make sure the Dockerfile uses the PORT environment variable correctly.
 
-4. **Build failures**: Check the build logs in Render dashboard for specific error messages.
+4. **API key issues**: Verify all required API keys are set in the Render dashboard.
+
+5. **Build failures**: Check the build logs in Render dashboard for specific error messages.
 
 ### Logs:
 
