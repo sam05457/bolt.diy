@@ -3,7 +3,7 @@ const { execSync } = require('child_process');
 // Get git hash with fallback
 const getGitHash = () => {
   try {
-    return execSync('git rev-parse --short HEAD').toString().trim();
+    return execSync('git rev-parse --short HEAD', { stdio: 'pipe' }).toString().trim();
   } catch {
     return 'no-git-info';
   }
