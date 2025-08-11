@@ -91,11 +91,17 @@ These warnings appear during build but don't affect functionality:
 
 3. **"no-git-info" version**: Normal when uploading directly (not via Git)
 
+4. **"Some chunks are larger than 500 kB"**: Performance warning, doesn't affect functionality
+
+5. **"Error when using sourcemap"**: Normal in production builds, doesn't affect functionality
+
 ### Common Issues:
 
 1. **Git repository error**: This is normal when uploading directly. The app will show "no-git-info" for the commit version.
 
 2. **Cloudflare Workerd binary error**: Fixed in the optimized Dockerfile by disabling the dev proxy during builds.
+
+3. **"wrangler: not found" error**: Fixed by installing wrangler globally and adding npx fallback in startup script.
 
 3. **Port binding issues**: Make sure the Dockerfile uses the PORT environment variable correctly.
 
