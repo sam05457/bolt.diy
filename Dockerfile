@@ -13,11 +13,19 @@ COPY package.json pnpm-lock.yaml ./
 # Install dependencies (including dev dependencies for wrangler)
 RUN pnpm install --frozen-lockfile
 
+# Verify wrangler is available
+RUN which wrangler || echo "Global wrangler not found" && \
+    npx wrangler --version || echo "NPX wrangler not found" && \
+    ls -la ./node_modules/.bin/wrangler || echo "Local wrangler not found"
+
 # Copy source code
 COPY . .
 
 # Production build stage
 FROM base AS production
+
+# Install wrangler globally in production stage too
+RUN npm install -g wrangler@4.5.1
 
 # Set environment variables for production
 ENV NODE_ENV=production \
@@ -77,6 +85,14 @@ RUN chmod +x ./bindings.sh ./start-render.sh
 ENV NODE_ENV=production
 ENV DISABLE_CLOUDFLARE_PROXY=true
 RUN pnpm run build
+
+# Verify wrangler is available in production stage
+RUN echo "Verifying wrangler availability..." && \
+    which wrangler && wrangler --version || \
+    (echo "Global wrangler failed, checking alternatives..." && \
+     npx wrangler --version || \
+     ls -la ./node_modules/.bin/wrangler || \
+     echo "ERROR: No wrangler found!")
 
 # Expose port (Render will use PORT environment variable)
 EXPOSE $PORT
