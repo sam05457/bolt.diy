@@ -16,6 +16,13 @@ export default defineConfig((config) => {
     build: {
       target: 'esnext',
     },
+    server: {
+      // ✅ Allow Render domain
+      allowedHosts: [
+        'bolt-diy-tgft.onrender.com', // your Render app host
+        '.onrender.com',              // wildcard in case Render assigns dynamic preview hosts
+      ],
+    },
     plugins: [
       nodePolyfills({
         include: ['buffer', 'process', 'util', 'stream'],
